@@ -1,4 +1,3 @@
-
 import streamlit as st
 from PIL import Image
 from streamlit_extras.let_it_rain import rain
@@ -6,7 +5,6 @@ import os
 from datetime import datetime
 import base64
 
-#st.set_page_config(page_title="Palmer Penguin Prediction App")
 # Function to display and center the logo in the sidebar
 def display_logo():
     logo_path = 'logo.png'  # Adjust path to your logo file
@@ -106,16 +104,32 @@ rain(
     animation_length="infinite",
 )
 
-# Display content for the single page
-display_logo()
-st.sidebar.markdown('This application is designed to help users quickly and accurately learn about the species of Palmer Penguins')
+# Sidebar navigation
+st.sidebar.title("Navigation")
+page = st.sidebar.radio(
+    "Choose a page:",
+    ["Home", "Data Info", "Predictions", "About"]
+)
 
-display_header()
-display_date_time()
-display_penguin_image()
-display_data_info()
-display_culmen_image()
-display_additional_info()
+if page == "Home":
+    display_logo()
+    display_header()
+    display_date_time()
+    display_penguin_image()
+    display_data_info()
+    display_culmen_image()
+    display_additional_info()
 
-# Info message with a link to the dataset
+elif page == "Data Info":
+    display_data_info()
+
+elif page == "Predictions":
+    st.title("Predictions")
+    st.write("This is where prediction results would be displayed.")
+    # Add your prediction code here
+
+elif page == "About":
+    st.title("About")
+    st.write("This is where you can include information about the application.")
+
 st.info('For more information, you can access the Palmer Penguins dataset on GitHub: [palmerpenguins](https://github.com/allisonhorst/palmerpenguins)')
